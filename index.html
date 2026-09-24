@@ -31,6 +31,9 @@ nav a:hover{background:var(--primary-light)}
 .article-body p{margin-bottom:14px;font-size:.95rem}
 .article-body ul,.article-body ol{margin:0 0 16px 20px}
 .article-body li{margin-bottom:6px;font-size:.95rem}
+.article-body code{background:var(--primary-light);padding:2px 6px;border-radius:4px;font-size:.85em;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+.article-body pre{background:var(--bg);border:1px solid var(--border);border-left:3px solid var(--primary);border-radius:8px;padding:14px 16px;overflow-x:auto;margin:14px 0;line-height:1.55}
+.article-body pre code{background:none;padding:0;border-radius:0;font-size:.85em;color:var(--text);white-space:pre}
 .article-body table{width:100%;border-collapse:collapse;margin:16px 0;font-size:.9rem}
 .article-body th{background:var(--primary-light);color:var(--primary);font-weight:600;padding:10px 12px;text-align:left}
 .article-body td{border:1px solid var(--border);padding:10px 12px}
@@ -41,6 +44,8 @@ nav a:hover{background:var(--primary-light)}
 .affiliate-box .title{font-weight:600;font-size:.95rem;margin-bottom:4px}
 .affiliate-box .desc{font-size:.85rem;color:var(--muted)}
 .affiliate-box .link-placeholder{display:inline-block;margin-top:8px;padding:4px 12px;background:#fff;border:1px solid var(--accent);border-radius:6px;font-size:.82rem;color:var(--accent);font-family:monospace}
+.affiliate-box .affiliate-link{display:inline-block;margin-top:8px;padding:8px 16px;background:var(--accent);border-radius:6px;font-size:.85rem;font-weight:600;color:#fff;text-decoration:none;transition:opacity .2s}
+.affiliate-box .affiliate-link:hover{opacity:.85}
 .tag{display:inline-block;font-size:.75rem;padding:2px 10px;border-radius:12px;margin:0 4px 4px 0}
 .tag-blue{background:var(--primary-light);color:var(--primary)}
 .tag-green{background:#dcfce7;color:var(--success)}
@@ -756,9 +761,19 @@ footer p{font-size:.82rem;margin-bottom:4px}
 
 <h4>1. Claude Code（Anthropic）— 复杂工程首选</h4>
 <p>终端原生Agent，可整库读写、跑测试、Git操作一条龙，长上下文支持超大代码库，多项编程基准测试成绩领先。无图形界面、上手门槛高，重度使用成本显著。<strong>价格</strong>：含于Claude Pro订阅20美元/月起。</p>
+<ul>
+<li><strong>怎么上手</strong>：订阅Claude后在终端安装并运行claude命令，在项目根目录启动 → 让它先读代码库 → 用自然语言下任务（如"重构这个模块并跑通测试"）→ 在关键节点确认后放行执行</li>
+<li><strong>适合谁</strong>：做复杂工程重构、跨文件修改的开发者；不排斥终端的技术用户</li>
+<li><strong>避坑</strong>：长任务持续消耗token，先限定文件与范围再执行，别让它"自由发挥"</li>
+</ul>
 
 <h4>2. Cursor（Anysphere）— 日常开发主力</h4>
 <p>AI原生IDE体验成熟，VS Code生态无缝迁移，多文件Agent编辑，可自由切换GPT/Claude/Gemini多模型。重度Agent任务积分消耗快。<strong>价格</strong>：免费档可用；Pro 20美元/月。</p>
+<ul>
+<li><strong>怎么上手</strong>：下载桌面版（支持GitHub/Google登录）→ 首次启动可导入VS Code配置与插件 → Ctrl+K改选中代码、Ctrl+L整项目对话 → 开Agent模式让它跨文件修改</li>
+<li><strong>适合谁</strong>：需要图形界面、想零迁移从VS Code过来的开发者；学生可先用免费档</li>
+<li><strong>避坑</strong>：Agent模式自动执行很烧积分，大任务先预估；敏感代码关闭云同步选项</li>
+</ul>
 
 <div class="affiliate-box">
 <div class="label">联盟推广位 · 淘宝联盟</div>
@@ -769,40 +784,80 @@ footer p{font-size:.82rem;margin-bottom:4px}
 
 <h4>3. TRAE（字节跳动）— 国内开发者性价比之选</h4>
 <p>国内直连、中文语义理解好，免费档就能用主力功能，SOLO模式支持自然语言从零搭建项目。<strong>价格</strong>：免费版可用；国际版3美元/月起，国内付费档49元/月起。</p>
+<ul>
+<li><strong>怎么上手</strong>：官网下载桌面版（国内直连）→ 新建项目选SOLO模式 → 用中文一句话描述需求 → 自动生成多文件工程并可直接运行预览</li>
+<li><strong>适合谁</strong>：国内开发者、想从零搭项目但不想折腾环境配置的人；网络受限场景首选</li>
+<li><strong>避坑</strong>：生成质量依赖需求描述，先列功能清单再让它动手；上线前人工检查依赖与安全项</li>
+</ul>
 
 <h4>4. GitHub Copilot（微软）— 补全不减量</h4>
 <p>编辑器生态覆盖广（VS Code/JetBrains等全支持），代码补全不限量，入门价低；自主Agent能力弱于前三者。<strong>价格</strong>：Pro 10美元/月。</p>
+<ul>
+<li><strong>怎么上手</strong>：VS Code装GitHub Copilot扩展并登录GitHub → 写注释描述意图让它补全 → 终端输入自然语言命令（如"写一个带缓存的爬虫"）直接生成函数</li>
+<li><strong>适合谁</strong>：习惯传统IDE、只想要"智能补全"的开发者；编程学习者（免费档2000次/月）</li>
+<li><strong>避坑</strong>：它偏"补全"而非"自主干活"，长链路任务别指望一步到位；涉及公司代码注意审查策略设置</li>
+</ul>
 
 <h3>二、通用办公型Agent（面向普通用户/上班族）</h3>
 
 <h4>5. Kimi Work（月之暗面）— 长文档处理头部选手</h4>
 <p>长文档批量处理能力居首，支持本地文件夹挂载读写，浏览器插件复用登录态。适合投研、咨询、科研等文档密集型工作。<strong>价格</strong>：会员39元/月起。</p>
+<ul>
+<li><strong>怎么上手</strong>：下载桌面版并登录 → 打开Work空间挂载本地文件夹 → 把几十页研报拖进去 → 直接提问"总结这份合同的违约责任条款"</li>
+<li><strong>适合谁</strong>：投研、咨询、法务、学术等天天与长文打交道的岗位；需要跨多个PDF/Excel联查的人</li>
+<li><strong>避坑</strong>：上传涉密文件前先确认公司数据合规要求；"批量处理"前先单份验证准确率</li>
+</ul>
 
 <h4>6. 阶跃AI桌面版（阶跃星辰）— 全场景办公Agent</h4>
 <p>扫码即用免配置，自研Step 3.7 Flash专为执行训练，多步任务稳定，覆盖周报汇总、内容创作等日常办公。<strong>价格</strong>：客户端免费，9.9元周卡起、39元/月。</p>
+<ul>
+<li><strong>怎么上手</strong>：官网下载客户端 → 手机扫码登录（免配置）→ 直接下任务"汇总这周三个群的日报并输出表格" → 它调用日历、文档等应用逐步执行</li>
+<li><strong>适合谁</strong>：不想学配置、希望"一句话跑通多步任务"的职场人；想尝试桌面Agent的新手</li>
+<li><strong>避坑</strong>：跨应用操作会读取本地数据，留意它请求的权限范围；关键任务完成后人工核对</li>
+</ul>
 
 <h4>7. 办公小浣熊（商汤）— 数据分析与报表专精</h4>
 <p>支持20多种办公格式解析，可产出可编辑PPT，数据分析师与报表密集岗位的利器。<strong>价格</strong>：有免费试用，以官网为准。</p>
+<ul>
+<li><strong>怎么上手</strong>：网页版上传Excel/CSV → 用自然语言问"9月各区域销售额排名和环比" → 让它生成图表 → 一键导出可编辑PPT/表格</li>
+<li><strong>适合谁</strong>：财务、运营、HR等每天做报表的岗位；不会写SQL但想自助分析数据的人</li>
+<li><strong>避坑</strong>：复杂口径（去重、加权）先小样验证再全量跑；导出PPT样式以官网当前版本为准</li>
+</ul>
 
 <div class="affiliate-box">
 <div class="label">联盟推广位 · 京东联盟</div>
-<div class="title">AI办公提效训练营</div>
-<div class="desc">覆盖Kimi Work/办公小浣熊/飞书Aily实操，含50个办公自动化场景模板。定价99元，佣金比例15%。</div>
-<div class="link-placeholder">[京东联盟链接占位] union.jd.com/...</div>
+<div class="title">《Kimi高效办公：AI 10倍提升工作效率的方法和技巧》</div>
+<div class="desc">京东价116元（划线价122元）。用投研思维把AI接入真实工作流，覆盖写作、数据分析、跨团队协作全场景，附可落地的工程化方法，适合想系统性提效的职场人。</div>
+<div class="link-wrap"><a class="affiliate-link" href="https://u.jd.com/4Dn0DVB" target="_blank" rel="noopener sponsored">去京东查看《Kimi高效办公》</a></div>
 </div>
 
 <h3>三、Agent搭建平台类（零代码，自己搭Bot）</h3>
 
 <h4>8. 扣子Coze（字节跳动）— 零代码门槛最低</h4>
 <p>拖拽式搭建Agent，插件生态丰富，生图、检索、数据解析开箱即用，可一键发布抖音、豆包、飞书全平台，3.0版支持多人多Agent协作。<strong>价格</strong>：免费档每日送资源点。</p>
+<ul>
+<li><strong>怎么上手</strong>：coze.cn注册 → 从模板或空白创建Bot → 拖入知识库、插件、工作流节点 → 调试对话 → 一键发布到抖音/飞书/豆包</li>
+<li><strong>适合谁</strong>：运营、产品、客服想给业务搭智能助手的非技术人群；想快速验证Agent想法的人</li>
+<li><strong>避坑</strong>：免费资源点扛不住高并发，先看计费说明；发布到公域的Bot记得配置内容安全与敏感词</li>
+</ul>
 
 <h4>9. Dify（开源）— 私有化部署首选</h4>
 <p>开源可私有化，数据自主可控，模型接入不受限，工作流编排能力强；需一定技术基础。<strong>价格</strong>：开源自部署免费；云版免费档200条消息/月起。</p>
+<ul>
+<li><strong>怎么上手</strong>：docker compose一键部署（或直接用云版）→ 创建应用 → 编排LLM、知识检索、工具调用节点 → 接上自己的模型API Key → 发布API供业务调用</li>
+<li><strong>适合谁</strong>：有自建系统、数据不出域要求的技术团队；想深度定制Agent编排的开发者</li>
+<li><strong>避坑</strong>：自部署要自己管升级与稳定性，评估好运维成本；知识库检索效果依赖分块策略，先调chunk再谈上线</li>
+</ul>
 
 <h3>四、企业级平台类（面向企业）</h3>
 
 <h4>10. 实在Agent（实在智能）— 老系统自动化黑马</h4>
 <p>屏幕语义理解不依赖API，可操作无接口的老系统，国际权威计算机操作基准测试成功率90.2%登顶，全栈信创适配。<strong>价格</strong>：社区版免费，企业版商务报价。</p>
+<ul>
+<li><strong>怎么上手</strong>：官网下载社区版 → 录制或描述业务流程（如"从A系统导数据，填到B系统表单"）→ 它通过屏幕理解自动执行 → 配置定时调度与异常告警</li>
+<li><strong>适合谁</strong>：财务、政务、制造等还在用老旧桌面系统的流程部门；没有API也要自动化的场景</li>
+<li><strong>避坑</strong>：屏幕操作受系统界面版本影响，界面改版后需重新适配；上线前先跑通异常分支（弹窗、网络超时）</li>
+</ul>
 
 <h3>快速选型指南</h3>
 <table>
@@ -816,6 +871,16 @@ footer p{font-size:.82rem;margin-bottom:4px}
 <tr><td>私有化部署</td><td>Dify</td><td>开源免费</td></tr>
 <tr><td>企业老系统自动化</td><td>实在Agent</td><td>社区版免费</td></tr>
 </table>
+
+<h3>还没用上Agent？给你一条一周上手路径</h3>
+<p>别一上来就学十款工具，按这个顺序，一周内就能跑通"第一个有产出的Agent"：</p>
+<ol>
+<li><strong>第1天：从办公场景切入（0门槛）</strong>——装一个阶跃AI桌面版或Kimi Work，把本周最烦的一份长文档/表格丢给它处理，先体验"AI能自己干活"。</li>
+<li><strong>第2-3天：搭一个自己的Bot（零代码）</strong>——在扣子Coze用模板创建一个"周报助手"或"论文润色Bot"，接上你的知识库，发布到微信/飞书随手用。</li>
+<li><strong>第4-5天：让AI开始写代码（有基础的）</strong>——装Cursor（图形界面最友好），把一个周末练习项目丢给它重构，学会"描述需求→AI动手→你review"的协作节奏。</li>
+<li><strong>第6-7天：固化一个日常自动化</strong>——用Dify或Coze工作流，把"收集数据→AI分析→输出报告"这条链路做成定时任务，让Agent每周自动跑。</li>
+</ol>
+<p>目标是让Agent先承接你20%重复劳动，再逐步扩大边界——工具是换得来的，习惯才是门槛。</p>
 
 <div class="callout">
 <p><strong>提示</strong>：没有最好用的Agent，只有和你的场景与预算最匹配的那款。建议先从免费档或社区版开始实测，确认任务完成度后再决定付费升级。开发者自建系统可关注OpenClaw、LangGraph、CrewAI等开源框架；企业云端编排可看阿里云百炼与腾讯云ADP。</p>
@@ -888,6 +953,45 @@ footer p{font-size:.82rem;margin-bottom:4px}
 <li><strong>业务执行层（代码/API）</strong>：拿到类型化结果直接执行动作</li>
 </ol>
 <p><strong>接入方式</strong>：访问Jev官网console.typesafe.ai注册获取API Key，把当前局面整理成结构化State，定义Questions（Choice/Score/Noul），通过REST API或官方SDK一次调用并行评估，直接消费类型化结果。</p>
+
+<h3>最小接入示例（示意，以官方文档为准）</h3>
+<p>Jev接入与传统大模型相反——<strong>不写提示词，而是定义"问题"</strong>。一次典型的调用长这样：</p>
+<pre><code>// 1. 定义问题：一次调用里让Jev回答3个判断题
+{
+  "state": "用户提交了订单#8841的退款申请，金额299元，商品7天内未拆封",
+  "questions": [
+    {"id": "q1", "type": "Choice", "options": ["同意退款", "拒绝退款", "转人工审核"]},
+    {"id": "q2", "type": "Score", "range": [1, 5]},   // 用户信用评分
+    {"id": "q3", "type": "Noul"}                       // 是否存在欺诈风险
+  ]
+}
+
+// 2. Jev返回类型化结果（无需解析自然语言）
+{
+  "q1": {"choice": "同意退款", "confidence": 0.93},
+  "q2": {"score": 4.2, "confidence": 0.88},
+  "q3": {"probability": 0.35}
+}
+
+// 3. 代码直接按置信度分流：&gt;0.9 自动执行，否则升级大模型或转人工</code></pre>
+<p>整个过程一次API调用、毫秒级返回，替代了过去"提示词→JSON输出→解析→纠错"的传统链路。</p>
+
+<h3>局限与争议：Jev不是银弹</h3>
+<ul>
+<li><strong>只判断、不生成</strong>：它永远不会帮你写回复、写代码，所有需要"产出内容"的环节仍需生成式模型兜底——它是配角不是主角。</li>
+<li><strong>判断质量取决于问题设计</strong>：结果虽然是类型化的，但"选项漏了、量表设计不合理"会直接拖垮决策质量，出问题时很难追责。</li>
+<li><strong>依赖State构造质量</strong>：输入的状态越结构化、越完整，判断越准；把混乱的原始上下文直接丢给它，效果会大打折扣。</li>
+<li><strong>生态仍在早期</strong>：模型发布仅数周，可复用的成熟案例与第三方整合还不多，生产环境的大规模验证仍需时间。</li>
+</ul>
+
+<h3>三分钟上手清单</h3>
+<ol>
+<li>访问 console.typesafe.ai 注册并获取 API Key</li>
+<li>把"当前局面"整理成一段结构化 State 文本</li>
+<li>列出你最想让它做的判断题：选哪个 / 打几分 / 是或否</li>
+<li>用官方 SDK 或 REST API 发起一次调用，拿到类型化结果</li>
+<li>在代码里按置信度分流：高置信自动执行，低置信转大模型或人工</li>
+</ol>
 
 <div class="callout">
 <p><strong>提示</strong>：Jev不会替代大模型，但可能改变Agent架构——把"判断"从完整文本生成中剥离出来，避免为大模型杀鸡用牛刀。建议开发者在搭建Agent时先画出决策清单，把判断题交给Jev，把写作题留给生成模型，成本与速度都能大幅优化。</p>
